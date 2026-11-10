@@ -1,0 +1,82 @@
+error: Can't create the symlink for multishells at "/Users/danielefalchi/.local/state/fnm_multishells/43685_1794344317339". Maybe there are some issues with permissions for the directory? Operation not permitted (os error 1)
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>Quando vedrai il tuo fidanzato?</title>
+  <style>
+    :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; margin: 0; background: #fff; color: #161616; }
+    body { min-height: 100svh; display: grid; place-items: center; padding: max(28px, env(safe-area-inset-top)) 24px max(28px, env(safe-area-inset-bottom)); }
+    main { width: 100%; max-width: 390px; text-align: center; }
+    .logo { display: block; width: min(100%, 270px); height: auto; margin: 0 auto 30px; }
+    h1 { max-width: 320px; margin: 0 auto 34px; font-size: clamp(30px, 9vw, 38px); line-height: 1.08; letter-spacing: -1.5px; font-weight: 700; }
+    button { width: 100%; min-height: 58px; padding: 15px 22px; border: 0; border-radius: 14px; background: #003054; color: #fff; font: inherit; font-size: 17px; font-weight: 650; line-height: 1.25; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    button:active { transform: scale(.985); }
+    button:focus-visible { outline: 3px solid #161616; outline-offset: 4px; }
+    #status { min-height: 100px; display: grid; place-items: center; margin: 0 auto; max-width: 340px; font-size: 20px; line-height: 1.35; font-weight: 600; letter-spacing: -.3px; }
+    [hidden] { display: none !important; }
+    .spinner { width: 28px; height: 28px; border: 3px solid #d7e0e6; border-top-color: #003054; border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .result #logo, .result h1 { display: none; }
+    .result #status { position: fixed; inset: 0; max-width: none; min-height: 100svh; padding: 32px; display: grid; place-items: center; font-size: clamp(26px, 8vw, 38px); line-height: 1.15; font-weight: 800; letter-spacing: -.8px; }
+    .confetti { position: fixed; z-index: 2; top: -14px; width: 9px; height: 14px; border-radius: 2px; pointer-events: none; animation: fall var(--duration) linear forwards; }
+    @keyframes fall { to { transform: translate3d(var(--drift), 110svh, 0) rotate(var(--spin)); opacity: .9; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <img id="logo" class="logo" src="polito-logo.png" alt="Logo del Politecnico di Torino">
+    <h1>Quando vedrai il tuo fidanzato?</h1>
+    <button id="ask" type="button">Chiedi al Politecnico quando verrà rilasciato il tuo fidanzato!</button>
+    <div id="status" role="status" aria-live="polite" hidden></div>
+  </main>
+  <script>
+    const main = document.querySelector('main');
+    const button = document.querySelector('#ask');
+    const status = document.querySelector('#status');
+    const messages = [
+      'Stiamo valutando quando rilasciarlo dalla detenzione forzata...',
+      'Il tuo fidanzato non c’è mai? Ti ama lo stesso! Ma forse è nelle carceri del popitecnico.'
+    ];
+    const wait = (ms) => new Promise(resolve => window.setTimeout(resolve, ms));
+    const showSpinner = () => { status.innerHTML = '<span class="spinner" aria-label="Loading"></span>'; };
+    function celebrate() {
+      const colors = ['#003054', '#d6a927', '#a71930', '#76a6c2'];
+      for (let i = 0; i < 54; i++) {
+        const bit = document.createElement('span');
+        bit.className = 'confetti';
+        bit.setAttribute('aria-hidden', 'true');
+        bit.style.left = `${Math.random() * 100}vw`;
+        bit.style.backgroundColor = colors[i % colors.length];
+        bit.style.setProperty('--duration', `${2.3 + Math.random() * 1.8}s`);
+        bit.style.setProperty('--drift', `${Math.random() * 130 - 65}px`);
+        bit.style.setProperty('--spin', `${Math.random() * 800 - 400}deg`);
+        document.body.append(bit);
+        window.setTimeout(() => bit.remove(), 4300);
+      }
+    }
+    button.addEventListener('click', async () => {
+      button.hidden = true;
+      status.hidden = false;
+      showSpinner();
+      await wait(900);
+      status.textContent = messages[0];
+      await wait(3500);
+      showSpinner();
+      await wait(900);
+      status.textContent = messages[1];
+      await wait(3500);
+      showSpinner();
+      await wait(900);
+      main.classList.add('result');
+      status.textContent = 'Giovedì al sushi !!! e poi nanna-abbiocco in via ormea!';
+      celebrate();
+    }, { once: true });
+  </script>
+</body>
+</html>
